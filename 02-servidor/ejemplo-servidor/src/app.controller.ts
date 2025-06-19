@@ -1,9 +1,9 @@
-import { Controller, Get, Param, Query, Headers, Post, Body, HttpCode } from '@nestjs/common';
+import { Controller, Get, Param, Query, Headers, Post, Body, HttpCode, NotFoundException, HttpException } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
   getHello(): string {
@@ -20,5 +20,23 @@ export class AppController {
   ): string {
     return id + hola + ' Funcionando ' + escuela + monto
   }
+
+  @Get('/casa')
+  @HttpCode(200)
+  ejemploCasa(@Query('idCasa') idCasa) {
+    if (idCasa === '1') {
+      return [{ id: 1, nombre: 'Casa 1' }];
+    } else if (idCasa === '2') {
+      return [{ id: 1, nombre: 'Casa 2' }];
+    } else if (idCasa === '3') {
+      throw new NotFoundException(
+        { message: 'No se encuentra' },
+      );
+    } else {
+      throw new HttpException(
+        { statusCode: 400, message: 'Parámetro idCasa inválido' },
+        400
+      );
+    }
+  }
 }
- 
