@@ -51,6 +51,17 @@ export class AppController {
   @Get('/casa')
   @HttpCode(200)
   ejemploCasa(@Query('idCasa') idCasa) {
+
+    if (!idCasa) {
+      return {
+        statusCode: 200,
+        data: [
+          { id: 1, nombre: 'Casa 1' },
+          { id: 2, nombre: 'Casa 2' }
+        ]
+      };
+    }
+
     if (idCasa === '1') {
       return {
         statusCode: 200,
