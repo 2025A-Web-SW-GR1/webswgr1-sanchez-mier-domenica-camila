@@ -1,5 +1,5 @@
 # Examen Primer Bimestre - Servicio REST: Casas
-**Estudiante:** Doménica Sánchez 
+**Estudiantes:** Doménica Sánchez y Esteban Hidalgo
 
 Este proyecto es un ejemplo de servicio REST utilizando 
 **NestJS**. Permite obtener información de casas mediante una solicitud HTTP `GET`, con soporte para consultas específicas por ID o para obtener el listado completo.
