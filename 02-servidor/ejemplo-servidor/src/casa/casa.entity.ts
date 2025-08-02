@@ -14,6 +14,7 @@ export class Casa {
   @Column({ nullable: true })
   imagenURL?: string;
 
+    //======================= TRABAJO EN CLASE ============================
   @Column({ nullable: true })
   fileContentType?: string;
 

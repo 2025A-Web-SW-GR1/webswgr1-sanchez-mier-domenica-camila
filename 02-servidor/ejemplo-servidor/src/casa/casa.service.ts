@@ -65,10 +65,11 @@ export class CasaService {
         return this.casaRepository.delete(id);
     }
 
-
     buscarUnoPorUsername(
         username: string
     ) {
         return this.casaRepository.findOneByOrFail({ username });
     }
+
+
 }
