@@ -1,12 +1,12 @@
-import { Controller, Get, Param, Query, Headers, Post, Body, HttpCode, NotFoundException, HttpException } from '@nestjs/common';
+import { Controller, Get, Param, Query, Headers, Post, Body, HttpCode, NotFoundException, HttpException, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 /*
 type Casa = { 
   id:number;
   nombre:string;
 };
-*/ 
-interface Casa{
+*/
+interface Casa {
   id: number;
   nombre: string;
 };
@@ -56,64 +56,64 @@ export class AppController {
    * - /casa?idCasa=2 → Casa 2
    * - /casa?idCasa=3 → 404 No se encuentra
    */
-/*
-  @Get('/casa')
-  @HttpCode(200)
-  ejemploCasa(@Query('idCasa') idCasa) {
-
-    if (!idCasa) {
-      return {
-        statusCode: 200,
-        data: [
-          { id: 1, nombre: 'Casa 1' },
-          { id: 2, nombre: 'Casa 2' }
-        ]
-      };
+  /*
+    @Get('/casa')
+    @HttpCode(200)
+    ejemploCasa(@Query('idCasa') idCasa) {
+  
+      if (!idCasa) {
+        return {
+          statusCode: 200,
+          data: [
+            { id: 1, nombre: 'Casa 1' },
+            { id: 2, nombre: 'Casa 2' }
+          ]
+        };
+      }
+  
+      if (idCasa === '1') {
+        return {
+          statusCode: 200,
+          data: [{ id: 1, nombre: 'Casa 1' }]
+        };
+      } else if (idCasa === '2') {
+        return {
+          statusCode: 200,
+          data: [{ id: 1, nombre: 'Casa 2' }]
+        };
+      } else if (idCasa === '3') {
+        throw new NotFoundException(
+          {
+            statusCode: 404,
+            message: 'No se encuentra'
+          },
+        );
+      } else {
+        throw new HttpException(
+          {
+            statusCode: 400,
+            message: 'Parámetro idCasa inválido'
+          },
+          400
+        );
+      }
     }
+  */
 
-    if (idCasa === '1') {
-      return {
-        statusCode: 200,
-        data: [{ id: 1, nombre: 'Casa 1' }]
-      };
-    } else if (idCasa === '2') {
-      return {
-        statusCode: 200,
-        data: [{ id: 1, nombre: 'Casa 2' }]
-      };
-    } else if (idCasa === '3') {
-      throw new NotFoundException(
-        {
-          statusCode: 404,
-          message: 'No se encuentra'
-        },
-      );
-    } else {
-      throw new HttpException(
-        {
-          statusCode: 400,
-          message: 'Parámetro idCasa inválido'
-        },
-        400
-      );
-    }
-  }
-*/
+  // CORRECCIÓN DEL EJEMPLO DE SERVICIO REST
 
-// CORRECCIÓN DEL EJEMPLO DE SERVICIO REST
-
-  public datos:Casa[] = [{ id:1, nombre:"Casa 1"}, { id:2, nombre:"Casa 2"}, { id:3, nombre:"Casa 3"}];
+  public datos: Casa[] = [{ id: 1, nombre: "Casa 1" }, { id: 2, nombre: "Casa 2" }, { id: 3, nombre: "Casa 3" }];
 
   @Get('casa')
   obtenerCasas(
     @Query('idCasa') idCasa: string,
   ): Casa[] {
     const idCasaNumber = Number(idCasa);
-    if(!idCasa) return this.datos;
+    if (!idCasa) return this.datos;
     const resultado = this.datos.filter(a => a.id === idCasaNumber);
-    if(resultado.length > 0){
+    if (resultado.length > 0) {
       return resultado;
-    }else{
+    } else {
       throw new NotFoundException('No se encuentra')
     }
   }

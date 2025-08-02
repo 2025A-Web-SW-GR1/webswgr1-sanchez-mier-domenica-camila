@@ -1,51 +1,126 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Datos de Sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container-custom {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+
+        .card-custom {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header-custom {
+            background-color: #0d6efd;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .img-fluid-custom {
+            border-radius: 10px;
+        }
+
+        .table-session {
+            width: 100%;
+        }
+
+        .table-session th,
+        .table-session td {
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .table-session th {
+            width: 40%;
+            background-color: #f1f1f1;
+            font-weight: bold;
+        }
+
+        .table-session td {
+            text-align: right;
+        }
+
+        .alert-custom {
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            background-color: #ffeeba;
+            /* Un color de alerta más suave */
+            color: #664d03;
+        }
+    </style>
 </head>
 
-<% var arregloDeNumeros=[1,2,3,4,5]; %>
-
-    <body>
-        <h1>Datos Sesion</h1>
-        <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <% if (casa?.username) { %>
-                    <p><strong>Username: </strong>
-                        <%= casa.username %>
-                    </p>
-                    <p><strong>Nombre casa: </strong>
-                        <%= casa.nombre %>
-                    </p>
-                    <p><strong>Ejemplo iteracion:</strong></p>
-
-                    <ul>
-                        <% arregloDeNumeros.forEach(function(numero){ %>
-                            <li>
-                                <%= numero %>
-                            </li>
-                            <% }); %>
-                    </ul>
-                    <a href="/auth/logout">
-                        <button>
-                            Logout
-                        </button>
-                        </button>
-                        <% } else {%>
-                            <h2>NO tiene sesion!</h2>
-                            <% }%>
+<body>
+    <div class="container container-custom">
+        <div class="card card-custom">
+            <div class="card-header card-header-custom text-center py-3">
+                <h2>Bienvenid@ </h2>
             </div>
-            <div class="col-sm-4"></div>
+            <div class="card-body">
+                <% if (casa?.username) { %>
+                    <h4 class="card-title text-center mb-4">Información de la Casa</h4>
+                    <div class="text-center mb-4">
+                        <img src="<%= casa.imagenURL %>" class="img-fluid img-fluid-custom" alt="Imagen de la casa"
+                            width="200">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-session">
+                            <tbody>
+                                <tr>
+                                    <th><i class="fas fa-user-circle me-2"></i>Usuario</th>
+                                    <td>
+                                        <%= casa.username %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><i class="fas fa-home me-2"></i>Nombre de la Casa</th>
+                                    <td>
+                                        <%= casa.nombre %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><i class="fas fa-dollar-sign me-2"></i>Valor</th>
+                                    <td>$<%= casa.valor %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <a href="/auth/todas" class="btn btn-primary">Ver todas las casas</a>
+                        <a href="/auth/logout" class="btn btn-danger">Cerrar sesión</a>
+                    </div>
+                    <% } else { %>
+                        <div class="text-center py-4">
+                            <i class="fas fa-user-lock text-warning fa-4x mb-3"></i>
+                            <h4 class="alert-heading fw-bold">Acceso Denegado</h4>
+                            <p class="mb-0">Para ver el contenido de esta página, por favor inicie sesión.</p>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <a href="/auth/login" class="btn btn-warning">Iniciar Sesión</a>
+                        </div>
+                        <% } %>
+            </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-            crossorigin="anonymous"></script>
-    </body>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
 
 </html>

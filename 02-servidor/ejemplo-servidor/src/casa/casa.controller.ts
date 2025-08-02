@@ -112,11 +112,8 @@ export class CasaController {
             throw new BadRequestException('Archivo no valido');
         }
 
-        
+
     }
-
-
-
 
     @Get('streamDownloadFile/:id')
     async stream(
@@ -134,4 +131,5 @@ export class CasaController {
         // Hay otras formas para descargar como un buffer de datos tambien.
         file.pipe(response as any);
     }
+
 }

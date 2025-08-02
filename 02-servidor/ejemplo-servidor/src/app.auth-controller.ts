@@ -84,4 +84,14 @@ export class AuthController {
             casa,
         });
     }
+
+    @Get('todas')
+    async verTodasLasCasas(
+        @Res() res: any,
+    ) {
+        const casas = await this.casaService.obtenerTodos();
+        res.render('todas', {
+            casas
+        });
+    }
 }
